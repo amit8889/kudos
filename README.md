@@ -9,6 +9,7 @@ This is a Kudos application built with Node.js and MongoDB. The application allo
 - [Installation](#installation)
 - [Running the Application](#running-the-application)
 - [Entity Relationship Diagram](#entity-relationship-diagram)
+- [Emails ](#email)
 
 ## Getting Started
 
@@ -94,4 +95,14 @@ Follow these instructions to set up and run the Kudos application on your local 
       kudosId ObjectId [ref: > kudos._id]
       createdAt Date
     }
+```
+## Emails
+```base
+amit-kudos-1@gmail.com
+amit-kudos-2@gmail.com
+amit-kudos-3@gmail.com
+amit-kudos-4@gmail.com
+amit-kudos-5@gmail.com
+
+
 ```
