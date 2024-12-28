@@ -1,52 +1,47 @@
-import { useEffect ,useCallback} from "react";
+import { useEffect, useCallback } from "react";
 import useApiCall from "../../networks/api.js";
-import {useNavigate} from "react-router-dom"
-import KudosCard from "../KudosCard/KudosCard"
-import Loading from "../Loading/Loading"
+import { useNavigate } from "react-router-dom";
+import KudosCard from "../KudosCard/KudosCard";
+import Loading from "../Loading/Loading";
 
-// eslint-disable-next-line react/prop-types
+
 const Landing = ({ userData }) => {
   const navigate = useNavigate();
   const { loading, data, error, makeApiCall } = useApiCall();
-  const {makeApiCall:likedApiFun } = useApiCall();
+  const { makeApiCall: likedApiFun } = useApiCall();
 
   const getKudos = useCallback(async () => {
-    // eslint-disable-next-line react/prop-types
-  const customHeaders = { 'userid': userData._id };
-  const URL = "/api/kudos/getAllKudos";
-  await makeApiCall(URL, 'GET', null, customHeaders);
-// eslint-disable-next-line react/prop-types
-},[userData?._id,makeApiCall])
+
+    const customHeaders = { userid: userData._id };
+    const URL = "/api/kudos/getAllKudos";
+    await makeApiCall(URL, "GET", null, customHeaders);
+
+  }, [userData?._id, makeApiCall]);
 
   useEffect(() => {
-    if (!userData?._id) return; // Return early if userData or _id is not presen
+    if (!userData?._id) return; 
     getKudos();
-    // eslint-disable-next-line react/prop-types, react-hooks/exhaustive-deps
-  }, [userData?._id]); // Added makeApiCall as a dependency for the useEffect
+   
+  }, [userData?._id]);
 
-  const handleLikeToggle = async(kudosId,status = null)=>{
-    console.log("=======clikec",kudosId,status)
-    if(!kudosId || status==null){
+  const handleLikeToggle = async (kudosId, status = null) => {
+    if (!kudosId || status == null) {
       return;
     }
     const URL = "/api/kudos/kudosLikeAddOrRemove";
-    const customHeaders = { 'userid': userData._id };
-    const body = {kudosId:kudosId,isLiked:status};
-    await likedApiFun(URL, 'PUT', body, customHeaders,getKudos);
-
-
-  }
-  const handleAddKudos = async()=>{
-    navigate("/givekudos")
-  }
-
+    const customHeaders = { userid: userData._id };
+    const body = { kudosId: kudosId, isLiked: status };
+    await likedApiFun(URL, "PUT", body, customHeaders, getKudos);
+  };
+  const handleAddKudos = async () => {
+    navigate("/givekudos");
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center py-6">
       {/* Header */}
       <header className="flex justify-between items-center w-full px-6 max-w-4xl">
         <h1 className="text-2xl font-bold">
-            {/* eslint-disable-next-line react/prop-types */}
           Welcome {userData?.name || "User"}!
         </h1>
         <button
@@ -60,20 +55,19 @@ const Landing = ({ userData }) => {
       {/* News Feed */}
       <div className="mt-8 w-full max-w-4xl">
         {loading ? (
-         <Loading/>
+          <Loading />
+        ) : data && Array.isArray(data) && data.length > 0 ? (
+          <div className="max-h-[70vh] overflow-auto">
+            {data.map((item, index) => (
+              <KudosCard
+                item={item}
+                key={index}
+                handleLikeToggle={handleLikeToggle}
+              />
+            ))}
+          </div>
         ) : (
-          data && Array.isArray(data) && data.length > 0 ? (
-            <div className="max-h-[70vh] overflow-auto">
-
-              {
-                data.map((item, index) => (
-                  <KudosCard item={item} key={index} handleLikeToggle={handleLikeToggle}/>
-                ))
-              }
-            </div>
-          ) : (
-            <p className="text-gray-600">No kudos available.</p>
-          )
+          <p className="text-gray-600">No kudos available.</p>
         )}
         {error && (
           <span className="text-red-500" title={error}>

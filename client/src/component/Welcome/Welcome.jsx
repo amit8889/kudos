@@ -2,24 +2,29 @@ import {useState,useEffect} from 'react'
 import useApiCall from "../../networks/api.js"
 import { useNavigate } from "react-router-dom";
 import Loading from "../Loading/Loading"
-// eslint-disable-next-line react/prop-types
+
+
 export default function WelcomePage({setUserData}) {
+
   const navigate = useNavigate();
+
   const { loading, data, error, makeApiCall } = useApiCall();
   const [email, setEmail] = useState('');
+
   const handleLogin = async() => {
     const customHeaders = { 'Authorization': 'Bearer your_token_here' };
     const URL  =  "/api/users/login/?search="+email
     await makeApiCall(URL, 'GET',null, customHeaders);
 
   };
+
   useEffect(()=>{
     console.log(data)
     if(data?.name){
       setUserData(()=>data)
       navigate('/landing')
     }
-  },[data, data?._id, data?.name, navigate, setUserData])
+  },[data, navigate, setUserData])
 
 
   const handleEmailChange = (e)=>{

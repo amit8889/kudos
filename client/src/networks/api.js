@@ -20,7 +20,7 @@ const useApiCall = () => {
         url,
         method,
         data: body,
-        headers: { ...customHeaders, 'X-Custom-Header': 'foobar' },  // Merge custom headers with the default header
+        headers: { ...customHeaders, 'X-Custom-Header': 'foobar' },
       });
       console.log(data)
       if(data.success){
@@ -35,7 +35,7 @@ const useApiCall = () => {
       }
       
     } catch (err) {
-        console.log(err.response.data?.message)
+      console.log(err.response.data?.message)
       setError(err.response ? err.response.data?.message : 'Something went wrong');
       setLoading(false);
     }
