@@ -26,25 +26,41 @@ Follow these instructions to set up and run the Kudos application on your local 
    git clone https://github.com/your-username/kudos-app.git
    cd kudos-app
    ```
-2. Install dependencies:
-   ```base 
-   npm install
-    ```
-3. Create a .env file in the root directory and add your MongoDB connection string:
-   ```base 
-   MONGO_URI=mongodb://localhost:27017/kudos-app
-   PORT:5000
-    ```
-## Running the Application
-
-1. Start the server:
-   ```bash
-   npm start
-   ```
-2. Install dependencies:
-   ```base 
-   npm install
-    ```
+    ## Backend
+    1. Path
+        ```base
+        cd backend
+        ```
+    2. Install dependencies:
+       ```base 
+       npm install
+        ```
+    3. Create a .env file in the root directory and add your MongoDB connection string:
+       ```base 
+       MONGO_URI=mongodb://localhost:27017/kudos-app
+       PORT:5000
+        ```
+    4. Start Server
+        ```base
+        npm run start
+        ```
+    ## Frontend
+    1. Path
+        ```base
+        cd client
+        ```
+    2. Install dependencies:
+       ```base 
+       npm install
+        ```
+    3. Start Server
+        ```base
+        npm start
+        ```
+    4. Open Application
+        ```base
+        Open in your browser : http://localhost:5173
+        ```
 ## Entity Relationship Diagram
 
 ![ER Diagram](https://i.imgur.com/ukPzGJI.png)
