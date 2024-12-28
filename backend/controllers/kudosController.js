@@ -2,16 +2,16 @@ const Kudos = require("../models/Kudos");
 const KudosLikes = require("../models/KudosLikes");
 const asyncHandler = require("../middlewares/asyncHandler");
 const mongoose = require("mongoose");
+
 exports.addKudos = asyncHandler(async (req, res) => {
   const { receiver, badge, reason } = req.body;
-  //check all files required all will mogodb _id except reason
+
   if (!receiver || !badge || !reason) {
     return res.status(400).json({ success:false,message: "Please fill all fields" });
   }
   const sender = req.user._id?.toString();
 
   //check sende and reciver shoud be same
-
   if (sender === receiver?.toString()) {
     return res
       .status(400)
@@ -32,11 +32,6 @@ exports.getAnalytics = asyncHandler(async (req, res) => {
     { $group: { _id: "$receiver", kudosCount: { $sum: 1 } } },
     { $sort: { kudosCount: -1 } },
   ]);
-  console.log("=========23432=========")
-  console.log(JSON.stringify([
-    { $group: { _id: "$receiver", kudosCount: { $sum: 1 } } },
-    { $sort: { kudosCount: -1 } },
-  ]))
   res.status(200).json({
     message: "Analytics retrieved successfully",
     data: analytics,
@@ -106,8 +101,6 @@ exports.getAllKudos = asyncHandler(async (req, res) => {
       },
     },
   ];
-  console.log("=====================================")
-  console.log(JSON.stringify(pipeline));
   const kudos = await Kudos.aggregate(pipeline);
   res
     .status(200)
@@ -119,7 +112,6 @@ exports.getAllKudos = asyncHandler(async (req, res) => {
 });
 
 //kudos like count
-//we are just inc or dec a key dont want user data who liked i need ony count
 exports.kudosLikeAddOrRemove = asyncHandler(async (req, res) => {
   const { kudosId, isLiked } = req.body;
 

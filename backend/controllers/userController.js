@@ -148,13 +148,6 @@ exports.getDashBoardDetails = asyncHandler(async (req, res) => {
     { path: "sender", select: "name" },
     { path: "receiver", select: "name" }
   ]);
-  
-  console.log(populatedKudos);
-  
- // const mostLikedKudos = await kudoslikes.aggregate(mostLikedKudosPipeline);
-
-  console.log(JSON.stringify(populatedKudos))
-
   res.status(200).json({
     message: "Dashboard details fetched successfully",
     data: {
