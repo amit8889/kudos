@@ -10,6 +10,7 @@ This is a Kudos application built with Node.js and MongoDB. The application allo
 - [Running the Application](#running-the-application)
 - [Entity Relationship Diagram](#entity-relationship-diagram)
 - [Emails ](#email)
+- [View Postman Collection](#api-documentation)
 
 ## Getting Started
 
@@ -106,3 +107,8 @@ amit-kudos-5@gmail.com
 
 
 ```
+# API Documentation
+
+You can view and import the Postman collection from the following link:
+
+[View Postman Collection](https://documenter.getpostman.com/view/33292540/2sAYJ6Czhw)
